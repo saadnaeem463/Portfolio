@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html { scroll-behavior: smooth; }
+body { background: #1a1a1a; color: #f0f0f0; font-family: 'General Sans', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100dvh; }
+h1, h2, h3, h4 { font-family: 'Clash Display', sans-serif; font-weight: 600; line-height: 1.1; }
+p { color: #c0c0c0; }
+::selection { background: #006e8a; color: #fff; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.sec { padding: 6rem 0; scroll-margin-top: 6rem; }
+.h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); }
+.glass { background: linear-gradient(135deg, rgba(0,77,97,.14), rgba(130,38,89,.08)); border: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(8px); box-shadow: 0 24px 64px rgba(0,0,0,.35); }
+.card { background: #222; border: 1px solid #2e2e2e; border-radius: 16px; transition: transform .3s, border-color .3s; }
+.card:hover { transform: translateY(-4px); border-color: #006e8a; }
+.tag { font-family: Inter, sans-serif; font-size: 12px; padding: 4px 12px; border-radius: 999px; border: 1px solid #3a3a3a; color: #c0c0c0; }
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1.25rem; border-radius: 12px; font: 600 13px Inter, sans-serif; letter-spacing: .05em; text-transform: uppercase; border: 1px solid #3a3a3a; transition: all .25s; }
+.btn:hover { border-color: #006e8a; color: #fff; }
+.btn-p { background: linear-gradient(135deg, #004d61, rgba(0,110,138,.85)); border-color: transparent; }
+.name-reveal { display: inline-block; color: #141414; -webkit-text-stroke: 1.2px #8f8f8f; background: linear-gradient(135deg,#c0c0c0,#e8e8e8 40%,#a8a8a8 60%,#d4d4d4); background-clip: text; -webkit-background-clip: text; background-size: 0% 100%; background-repeat: no-repeat; transition: background-size .6s cubic-bezier(.77,0,.18,1); }
+.name-reveal:hover { color: transparent; -webkit-text-stroke-color: transparent; background-size: 100% 100%; }
+@media (hover: none) { .name-reveal { color: transparent; -webkit-text-stroke-color: transparent; background-size: 100% 100%; } }
+.input { width: 100%; padding: .75rem 1rem; border-radius: 10px; background: #222; border: 1px solid #3a3a3a; color: #f0f0f0; outline: none; transition: border-color .2s; }
+.input:focus { border-color: #006e8a; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
