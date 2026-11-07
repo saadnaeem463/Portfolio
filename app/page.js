@@ -43,10 +43,6 @@ export default function Home() {
     setProg({ built: 0, total: 0 }); setPhase("building"); setRun((r) => r + 1);
   }, []);
 
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) goLive(true);
-  }, [goLive]);
-
   // gentle nudge: the agents only build what is on screen, so ask the visitor to scroll
   useEffect(() => {
     setHint(false);

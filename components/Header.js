@@ -44,7 +44,7 @@ export default function Header({ phase, prog, onGoLive, onReplay, onSkip }) {
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid || open ? "bg-ink border-b border-line" : ""}`}>
       <div className="wrap flex h-16 items-center justify-between gap-4">
         <a href="#top" aria-label={`${site.name} – back to top`} className="display text-2xl tracking-wide">SAAD<span className="text-red">.</span></a>
-        <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 md:flex lg:gap-8">
           {links.map(([l, id]) => (
             <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}
               className={`relative py-1 text-xs font-bold uppercase tracking-[.18em] transition-colors hover:text-paper ${active === id ? "text-paper" : "text-mute"}`}>
@@ -55,7 +55,7 @@ export default function Header({ phase, prog, onGoLive, onReplay, onSkip }) {
         </nav>
         <div className="flex items-center gap-3">
           {motionBtn}
-          <a href="#contact" className="btn btn-red !min-h-[40px] !px-4 !text-[11px] max-md:hidden">Let’s talk</a>
+          <a href="#contact" className="btn btn-red !min-h-[40px] !px-4 !text-[11px] max-lg:hidden">Let’s talk</a>
           <button className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen(!open)}>
             <span className={`block h-0.5 w-6 bg-paper transition ${open ? "translate-y-2 rotate-45" : ""}`} />
             <span className={`block h-0.5 w-6 bg-paper transition ${open ? "opacity-0" : ""}`} />

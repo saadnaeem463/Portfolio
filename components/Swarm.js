@@ -24,7 +24,8 @@ export default function Swarm({ phase, run, onDone, onCount }) {
 
   useEffect(() => {
     if (phaseRef.current === "live") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    window.__swarmStarted = true;
+    document.documentElement.classList.add("build");
     const c = ref.current, ctx = c.getContext("2d");
     c.style.display = "";
     let w, h, raf, last = performance.now(), lastCheck = 0, exitT = 0, doneFired = false;
@@ -40,14 +41,18 @@ export default function Swarm({ phase, run, onDone, onCount }) {
       ang: (i / AGENTS.length) * Math.PI * 2, px: 0, py: 0, bw: 0, bh: 0, alpha: 1, trail: [],
     }));
 
+    let pending = 0;
     const pick = () => {
-      let best = null, bt = 1e9;
+      let best = null, bt = 1e9, n = 0;
+      const look = Math.min(220, h * 0.25); // start a little ahead of the viewport so fast scrolling rarely shows blanks
       document.querySelectorAll("[data-build]:not(.built)").forEach((el) => {
         if (claimed.has(el)) return;
         const r = el.getBoundingClientRect();
-        if (r.width < 4 || r.height < 4 || r.bottom < 64 || r.top > h - 30) return;
+        if (r.width < 4 || r.height < 4 || r.bottom < 64 || r.top > h + look) return;
+        n++;
         if (r.top < bt) { bt = r.top; best = el; }
       });
+      pending = n;
       return best;
     };
     const finishEl = (a) => {
@@ -112,7 +117,7 @@ export default function Swarm({ phase, run, onDone, onCount }) {
           if (Math.hypot(a.x - tx, a.y - ty) < 14 || a.t > 1.4) {
             const r = a.el.getBoundingClientRect();
             a.px = r.left; a.py = r.top + sy; a.bw = r.width; a.bh = r.height; a.t = 0;
-            a.dur = clamp(0.45 + (a.bw + a.bh) / 2600, 0.45, 1.1); a.state = "drag";
+            a.dur = clamp(0.45 + (a.bw + a.bh) / 2600, 0.45, 1.1) / (1 + Math.min(pending, 5) * 0.3); a.state = "drag";
           }
         }
         if (a.state === "drag") {

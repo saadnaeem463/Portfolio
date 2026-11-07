@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('build')}catch(e){}" }} />
+        <script dangerouslySetInnerHTML={{ __html: "try{var d=document.documentElement;d.classList.add('build');setTimeout(function(){if(!window.__swarmStarted)d.classList.remove('build')},8000)}catch(e){}" }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap" />
