@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { site } from "../data/site";
 
-const COLORS = ["#262626", "#0b3b4a", "#005a73", "#007f9f", "#2bb3d6"];
+const COLORS = ["#1a1a1a", "#4a1219", "#7d1a26", "#b8212f", "#e32b3c"];
 
 export default function Contributions() {
   const [state, setState] = useState({ status: "loading" });
@@ -19,9 +19,9 @@ export default function Contributions() {
       .catch(() => setState({ status: "error" }));
   }, []);
   return (
-    <div className="card p-6">
-      {state.status === "loading" && <p className="text-txt-muted">Loading contributions…</p>}
-      {state.status === "error" && <p className="text-txt-muted">Couldn&apos;t load the graph right now. <a className="underline" href={site.github} target="_blank" rel="noreferrer">See it on GitHub</a>.</p>}
+    <div className="rounded-[4px] border border-line p-6">
+      {state.status === "loading" && <p className="text-mute">Loading contributions…</p>}
+      {state.status === "error" && <p className="text-mute">Couldn&apos;t load the graph right now. <a className="underline" href={site.github} target="_blank" rel="noopener noreferrer">See it on GitHub</a>.</p>}
       {state.status === "ok" && (
         <>
           <div className="overflow-x-auto pb-2">
@@ -36,7 +36,7 @@ export default function Contributions() {
               ))}
             </div>
           </div>
-          <p className="mt-4 font-label text-sm text-txt-muted">{state.total} contributions in the last year</p>
+          <p className="mt-4 text-sm text-mute">{state.total} contributions in the last year</p>
         </>
       )}
     </div>

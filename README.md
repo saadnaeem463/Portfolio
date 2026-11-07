@@ -9,7 +9,7 @@ A fast, responsive personal portfolio showcasing my projects, tech stack and Git
 ![Next.js](https://img.shields.io/badge/Next.js_14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=black)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Saad_Naeem-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saad-naeem-5138a3409)
 [![Gmail](https://img.shields.io/badge/Gmail-Contact-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:saadnaeem463@gmail.com)
@@ -24,15 +24,14 @@ A fast, responsive personal portfolio showcasing my projects, tech stack and Git
 
 ## ✨ Features
 
-- **Intro splash screen** and a soft trailing cursor ring (desktop only)
-- **Metallic name-reveal effect** on the hero heading
-- **Flagship projects** with screenshots, tech tags, live-demo and GitHub buttons
-- **More projects** with feature highlights
-- **Tech stack grid** with icons for languages, frameworks, databases, ML and tools
+- **Cinematic dark theme**: near-black background, warm off-white text, red accent, Anton / Manrope / Caveat type
+- **Hero**: oversized name, background-removed portrait (`public/assets/images/profile-cutout.webp`) on a red disc, spinning badge, pointer spotlight
+- **Swarm build on load**: the page starts blank and labelled cursor agents (React, Next.js, Node, ...) fly to each block on screen, drag a selection box over it and build it live. They only build what is on screen, so scrolling keeps the build going
+- **When the build finishes** the agents circle in the bottom-left corner, nothing is ever rebuilt, and a **Go live** button pops up in the navbar. **Replay build** runs it again; **Skip** finishes instantly. Visitors with reduced-motion enabled get the finished site immediately
+- Scroll progress bar, active-section nav underline, tech-stack marquee
+- **Filterable project grid** with a detail dialog (Esc / backdrop / close button, focus returns to the clicked card)
 - **GitHub contribution graph** pulled live for the last year
-- **Working contact form** (via FormSubmit), with success and error states
-- **Scroll-triggered animations** (GSAP), active-section navbar, mobile menu
-- **Responsive** on all screen sizes and respects `prefers-reduced-motion`
+- **Working contact form** (via FormSubmit)
 
 ## 🚀 Projects Featured
 
@@ -48,8 +47,8 @@ A fast, responsive personal portfolio showcasing my projects, tech stack and Git
 
 - [Next.js 14](https://nextjs.org/) (App Router) and [React 18](https://react.dev/)
 - [Tailwind CSS 3](https://tailwindcss.com/)
-- [GSAP](https://gsap.com/) with ScrollTrigger
-- [Fontshare](https://www.fontshare.com/) (Clash Display, General Sans) and Inter
+- [Framer Motion](https://www.framer.com/motion/)
+- [Google Fonts](https://fonts.google.com/) (Anton, Manrope, Caveat)
 - [Skill Icons](https://skillicons.dev/) for tech-stack icons
 - [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api) for the contribution graph
 - [FormSubmit](https://formsubmit.co/) for the contact form
@@ -62,9 +61,12 @@ A fast, responsive personal portfolio showcasing my projects, tech stack and Git
 │   ├── page.js          # all page sections
 │   └── globals.css      # design tokens and shared styles
 ├── components/
-│   ├── Navbar.js        # sticky navbar with active-section highlight
-│   ├── Splash.js        # intro screen
-│   ├── Cursor.js        # trailing cursor ring
+│   ├── Header.js        # sticky header, progress bar, Motion button
+│   ├── Hero.js          # big name + portrait
+│   ├── Swarm.js         # agents that build the page (canvas engine)
+│   ├── Reveal.js        # marks a block as a build target (data-build)
+│   ├── Projects.js      # filter + grid, ProjectDialog.js = detail modal
+│   ├── About.js         # bio, education, tech stack
 │   ├── Contributions.js # GitHub contribution graph
 │   └── Contact.js       # contact form
 ├── data/
@@ -101,7 +103,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 - **Content:** edit `data/site.js` (bio, links, projects, tech stack, education).
 - **Photo and screenshots:** replace the files in `public/assets/images/`.
-- **Colors and fonts:** `tailwind.config.js` and `app/globals.css`.
+- **Colors and fonts:** `tailwind.config.js`, `app/globals.css` and the font link in `app/layout.js`.
 - **Contact form:** the first submission triggers an activation email from FormSubmit to the address in `data/site.js`. Confirm it once and messages will start arriving.
 
 ## 🌐 Deployment
@@ -115,4 +117,4 @@ The easiest way is [Vercel](https://vercel.com/): push this repo to GitHub, clic
 
 ---
 
-<div align="center">Built with Next.js, Tailwind CSS and GSAP.</div>
+<div align="center">Built with Next.js, Tailwind CSS and Framer Motion.</div>

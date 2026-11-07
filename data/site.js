@@ -26,11 +26,11 @@ export const flagship = [
 ];
 
 export const more = [
-  { title: "Heart Attack Predictor", img: "heart-predictor", alt: "Heart Attack Predictor app",
+  { title: "Heart Attack Predictor", group: "Machine Learning", img: "heart-predictor", alt: "Heart Attack Predictor app",
     desc: "A machine-learning web app that estimates heart-attack risk from a few patient inputs.",
     features: ["Inputs for age, sex, blood pressure, cholesterol and max heart rate", "Classifier-based risk prediction built with scikit-learn", "Data prepared and explored with Pandas", "Model developed and evaluated in a Jupyter Notebook", "Deployed as an interactive Streamlit app"],
     tech: ["Python", "scikit-learn", "Pandas", "Streamlit"], code: `${GH}/Heart-Attack-Predictor`, live: "https://heart-attack-predictorr.streamlit.app/" },
-  { title: "Expense Tracker", img: "expense-tracker", alt: "Expense Tracker dashboard",
+  { title: "Expense Tracker", group: "Frontend", img: "expense-tracker", alt: "Expense Tracker dashboard",
     desc: "Track income, expenses and spending by category from one clean dashboard.",
     features: ["Dashboard with current balance, income and expenses", "Add and review transactions", "Spending breakdown by category", "Report view for a quick overview", "Built with React and TypeScript"],
     tech: ["React", "TypeScript"], code: `${GH}/Expense-Tracker`, live: "https://expense-tracker-a77w.vercel.app/" },
@@ -47,3 +47,6 @@ export const stack = [
 export const education = [
   { period: "In progress", title: "FAST-NUCES", sub: "Computer Science", note: "FAST National University of Computer and Emerging Sciences, Karachi" },
 ];
+
+export const projects = [...flagship, ...more];
+export const categories = ["All", ...Array.from(new Set(projects.map((p) => p.group)))];
