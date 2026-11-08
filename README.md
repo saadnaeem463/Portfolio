@@ -26,7 +26,7 @@ A fast, responsive personal portfolio showcasing my projects, tech stack and Git
 
 - **Cinematic dark theme**: near-black background, warm off-white text, red accent, Anton / Manrope / Caveat type
 - **Hero**: oversized name, background-removed portrait (`public/assets/images/profile-cutout.webp`) on a red disc, spinning badge, pointer spotlight
-- **Swarm build on load**: the page starts blank and labelled cursor agents (React, Next.js, Node, ...) fly to each block on screen, drag a selection box over it and build it live. They only build what is on screen, so scrolling keeps the build going
+- **Swarm build on load + auto-tour**: the page starts blank and a swarm of 16 labelled cursor agents (React, Next.js, Node, ...) fly to each block, drag a selection box over it and build it live. Every button, icon, tag, tech tile and form field is its own block (`data-build`), so the agents build the small pieces one by one, while the page scrolls itself down. It waits whenever something on screen is still unbuilt, then glides back to the top when everything is done. Touching, scrolling or pressing a navigation key hands control to the visitor, and the agents then build whatever they scroll to
 - **When the build finishes** the agents circle in the bottom-left corner, nothing is ever rebuilt, and a **Go live** button pops up in the navbar. **Replay build** runs it again; **Skip** finishes instantly. Visitors with reduced-motion enabled get the finished site immediately
 - Scroll progress bar, active-section nav underline, tech-stack marquee
 - **Filterable project grid** with a detail dialog (Esc / backdrop / close button, focus returns to the clicked card)

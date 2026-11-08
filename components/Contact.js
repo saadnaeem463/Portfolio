@@ -3,7 +3,7 @@ import { useState } from "react";
 import { site } from "../data/site";
 
 const F = ({ label, name, type = "text", area }) => (
-  <label className="block text-xs font-bold uppercase tracking-[.16em] text-mute">{label}
+  <label data-build className="block text-xs font-bold uppercase tracking-[.16em] text-mute">{label}
     {area ? <textarea name={name} required rows={4} className="input mt-1 text-base normal-case tracking-normal" /> : <input name={name} type={type} required className="input mt-1 text-base normal-case tracking-normal" />}
   </label>
 );
@@ -30,10 +30,10 @@ export default function Contact() {
   return (
     <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
       <div>
-        <a href={`mailto:${site.email}`} className="display block break-all text-[clamp(1.6rem,3.2vw,2.6rem)] transition-colors hover:text-red">{site.email}</a>
+        <a href={`mailto:${site.email}`} data-build className="display block w-fit max-w-full break-all text-[clamp(1.6rem,3.2vw,2.6rem)] transition-colors hover:text-red">{site.email}</a>
         <ul className="mt-8 space-y-4 text-sm">
           {[["Location", site.location], ["LinkedIn", "Saad Naeem", site.linkedin], ["GitHub", `@${site.githubUser}`, site.github]].map(([l, v, h]) => (
-            <li key={l} className="rule flex items-baseline justify-between gap-4 pt-4">
+            <li data-build key={l} className="rule flex items-baseline justify-between gap-4 pt-4">
               <span className="text-xs font-bold uppercase tracking-[.18em] text-mute">{l}</span>
               {h ? <a href={h} target="_blank" rel="noopener noreferrer" className="text-paper hover:text-red">{v} ↗</a> : <span className="text-paper">{v}</span>}
             </li>
@@ -45,7 +45,7 @@ export default function Contact() {
         <F label="Email" name="email" type="email" />
         <F label="Subject" name="subject" />
         <F label="Message" name="message" area />
-        <button disabled={status === "sending"} className="btn btn-red w-full disabled:opacity-60">{status === "sending" ? "Sending…" : "Send message →"}</button>
+        <button data-build disabled={status === "sending"} className="btn btn-red w-full disabled:opacity-60">{status === "sending" ? "Sending…" : "Send message →"}</button>
         <p role="status" aria-live="polite" className="text-sm">
           {status === "ok" && <span className="text-emerald-400">Thanks for your message! I’ll get back to you soon.</span>}
           {status === "error" && <span className="text-red">Something went wrong. Please email me directly at {site.email}.</span>}

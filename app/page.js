@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -20,7 +20,7 @@ export default function Home() {
   const [prog, setProg] = useState({ built: 0, total: 0 });
   const [toast, setToast] = useState(false);
   const [ping, setPing] = useState(0);
-  const [hint, setHint] = useState(false);
+  const [auto, setAuto] = useState(false);
 
   const markAll = () => document.querySelectorAll("[data-build]").forEach((el) => { el.classList.add("built"); el.style.opacity = ""; el.style.clipPath = ""; });
 
@@ -43,20 +43,10 @@ export default function Home() {
     setProg({ built: 0, total: 0 }); setPhase("building"); setRun((r) => r + 1);
   }, []);
 
-  // gentle nudge: the agents only build what is on screen, so ask the visitor to scroll
-  useEffect(() => {
-    setHint(false);
-    if (phase !== "building") return;
-    const t = setTimeout(() => { if (window.scrollY < 40) setHint(true); }, 3500);
-    const off = () => setHint(false);
-    window.addEventListener("scroll", off, { passive: true, once: true });
-    return () => { clearTimeout(t); window.removeEventListener("scroll", off); };
-  }, [phase, run]);
-
   return (
     <>
-      <Header phase={phase} prog={prog} onGoLive={goLive} onReplay={replay} onSkip={goLive} />
-      <Swarm phase={phase} run={run} onDone={onDone} onCount={(built, total) => setProg({ built, total })} />
+      <Header phase={phase} prog={prog} onGoLive={goLive} onReplay={replay} onSkip={() => { goLive(true); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
+      <Swarm phase={phase} run={run} onDone={onDone} onCount={(built, total) => setProg({ built, total })} onAuto={setAuto} />
       <AnimatePresence>
         {toast && (
           <motion.div key="toast" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
@@ -66,10 +56,10 @@ export default function Home() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {hint && (
-          <motion.div key="hint" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
-            className="fixed bottom-6 left-1/2 z-[56] -translate-x-1/2 whitespace-nowrap rounded-full border border-line bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[.16em]" role="status">
-            Scroll <span className="text-red">↓</span> the agents build as you go
+        {auto && phase === "building" && (
+          <motion.div key="auto" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }}
+            className="fixed bottom-6 left-1/2 z-[56] -translate-x-1/2 whitespace-nowrap rounded-full border border-line bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[.16em] max-sm:px-4 max-sm:text-[10px]" role="status">
+            <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-red" />Auto-tour · touch or scroll to take over
           </motion.div>
         )}
       </AnimatePresence>
@@ -81,20 +71,20 @@ export default function Home() {
         <About />
         <section id="contributions" className="sec rule">
           <div className="wrap">
-            <Reveal className="mb-12">
-              <p className="kicker mb-3">04 — Activity</p>
-              <h2 className="display text-[clamp(3rem,8vw,7rem)]">Contribution <span className="outline-text">graph</span></h2>
-            </Reveal>
+            <div className="mb-12">
+              <p data-build className="kicker mb-3 w-fit">04 — Activity</p>
+              <h2 data-build className="display w-fit text-[clamp(3rem,8vw,7rem)]">Contribution <span className="outline-text">graph</span></h2>
+            </div>
             <Reveal><Contributions /></Reveal>
           </div>
         </section>
         <section id="contact" className="sec rule">
           <div className="wrap">
-            <Reveal className="mb-14">
-              <p className="kicker mb-3">05 — Contact</p>
-              <h2 className="display text-[clamp(3.2rem,11vw,10rem)]">Let’s build<br /><span className="text-red">something.</span></h2>
-            </Reveal>
-            <Reveal><Contact /></Reveal>
+            <div className="mb-14">
+              <p data-build className="kicker mb-3 w-fit">05 — Contact</p>
+              <h2 data-build className="display w-fit text-[clamp(3.2rem,11vw,10rem)]">Let’s build<br /><span className="text-red">something.</span></h2>
+            </div>
+            <Contact />
           </div>
         </section>
       </main>
